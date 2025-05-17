@@ -1,0 +1,99 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const skills = [
+  'JavaScript',
+  'TypeScript',
+  'React',
+  'Node.js',
+  'Python',
+  'Git',
+  'AWS',
+  'Docker',
+];
+
+const projects = [
+  {
+    title: 'Proyecto E-commerce',
+    description: 'Tienda online desarrollada con React y Node.js',
+    link: '#',
+    tech: ['React', 'Node.js', 'MongoDB'],
+  },
+  {
+    title: 'App de Gestión',
+    description: 'Sistema de gestión empresarial fullstack',
+    link: '#',
+    tech: ['TypeScript', 'Express', 'PostgreSQL'],
+  },
+];
+---
+
+<Layout>
+  <main class='container mx-auto px-4 py-8'>
+    <!-- Hero Section -->
+    <section class='text-center py-20'>
+      <h1 class='text-5xl font-bold mb-4'>Tu Nombre</h1>
+      <p class='text-xl text-gray-600 mb-8'>Desarrollador Full Stack</p>
+      <p class='max-w-2xl mx-auto text-gray-600'>
+        Apasionado por crear soluciones tecnológicas innovadoras. Especializado
+        en desarrollo web y aplicaciones modernas.
+      </p>
+    </section>
+
+    <!-- Skills Section -->
+    <section class='py-10'>
+      <h2 class='text-3xl font-bold text-center mb-8'>Habilidades</h2>
+      <div class='flex flex-wrap justify-center gap-4'>
+        {
+          skills.map((skill) => (
+            <span class='bg-gray-100 px-4 py-2 rounded-full'>{skill}</span>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class='py-10'>
+      <h2 class='text-3xl font-bold text-center mb-8'>Proyectos</h2>
+      <div class='grid md:grid-cols-2 gap-8'>
+        {
+          projects.map((project) => (
+            <div class='border rounded-lg p-6'>
+              <h3 class='text-xl font-bold mb-2'>{project.title}</h3>
+              <p class='text-gray-600 mb-4'>{project.description}</p>
+              <div class='flex flex-wrap gap-2'>
+                {project.tech.map((tech) => (
+                  <span class='bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded'>
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class='py-10 text-center'>
+      <h2 class='text-3xl font-bold mb-8'>Contacto</h2>
+      <div class='flex justify-center gap-6'>
+        <a
+          href='https://github.com/tuusuario'
+          class='text-gray-600 hover:text-gray-900'
+        >
+          GitHub
+        </a>
+        <a
+          href='https://linkedin.com/in/tuusuario'
+          class='text-gray-600 hover:text-gray-900'
+        >
+          LinkedIn
+        </a>
+        <a href='mailto:tu@email.com' class='text-gray-600 hover:text-gray-900'>
+          Email
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>
