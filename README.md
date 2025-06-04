@@ -1,12 +1,20 @@
-# Astro Starter Kit: Basics
+# Portfolio Profesional - Programador
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+> 🚀 **Portfolio moderno y responsivo construido con Astro, TypeScript y Tailwind CSS**
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+Un portfolio profesional completo con arquitectura escalable, diseño moderno y estructura preparada para migración a APIs externas.
 
-## 🚀 Project Structure
+## ✨ Características
 
-Inside of your Astro project, you'll see the following folders and files:
+- **Diseño Responsivo**: Adaptable a todos los dispositivos
+- **Arquitectura Escalable**: Mock API preparada para migración a servicios externos (Supabase, etc.)
+- **TypeScript**: Tipado fuerte para mejor mantenibilidad
+- **Tailwind CSS**: Styling moderno y eficiente
+- **Secciones Completas**: Hero, Skills, Timeline, Projects, Contact
+- **Tooltips Interactivos**: Explicaciones detalladas de soft skills
+- **Animaciones Suaves**: Transiciones profesionales y elegantes
+
+## 🏗️ Arquitectura del Proyecto
 
 ```text
 /
@@ -14,27 +22,65 @@ Inside of your Astro project, you'll see the following folders and files:
 │   └── favicon.svg
 ├── src/
 │   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
+│   │   └── Layout.astro           # Layout principal
+│   ├── pages/
+│   │   └── index.astro           # Página del portfolio
+│   ├── types/
+│   │   └── index.ts              # Interfaces TypeScript
+│   ├── mocks/
+│   │   └── api/
+│   │       └── data.ts           # Datos mock del portfolio
+│   ├── services/
+│   │   └── api.ts                # Capa de servicios API
+│   └── components/               # Componentes reutilizables
+├── tailwind.config.js            # Configuración Tailwind
 └── package.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+### 📋 Documentación Detallada
 
-## 🧞 Commands
+Para información completa sobre la implementación, arquitectura y características:
 
-All commands are run from the root of the project, from a terminal:
+👉 **[Ver Documentación Completa](./PORTFOLIO.md)**
 
-| Command                   | Action                                           |
+## 🚀 Secciones del Portfolio
+
+1. **Hero Section**: Presentación personal con biografía
+2. **Skills Section**: 
+   - Habilidades técnicas organizadas por categorías
+   - Soft skills con tooltips informativos
+   - Diseño en tarjetas separadas con iconos
+3. **Timeline**: Evolución profesional con logros y tecnologías
+4. **Projects**: Showcase de proyectos con tecnologías utilizadas
+5. **Contact**: Enlaces a redes sociales y contacto
+
+## 🧞 Comandos de Desarrollo
+
+| Comando                   | Acción                                           |
 | :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+| `npm install`             | Instala dependencias                            |
+| `npm run dev`             | Inicia servidor de desarrollo en `localhost:4321` |
+| `npm run build`           | Construye el sitio para producción en `./dist/` |
+| `npm run preview`         | Previsualiza la build localmente               |
+| `npm run astro ...`       | Ejecuta comandos CLI como `astro add`, `astro check` |
 
-## 👀 Want to learn more?
+## 🎨 Tecnologías Utilizadas
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- **[Astro](https://astro.build)**: Framework web moderno
+- **[TypeScript](https://www.typescriptlang.org/)**: Superset de JavaScript con tipado
+- **[Tailwind CSS](https://tailwindcss.com/)**: Framework CSS utility-first
+- **[@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin)**: Plugin para tipografía
+
+## 🔄 Migración a API Externa
+
+El proyecto está preparado para migración fácil a APIs externas como Supabase:
+
+1. Los tipos están definidos en `/src/types/index.ts`
+2. La capa de servicios en `/src/services/api.ts` abstrae la fuente de datos
+3. Solo requiere cambiar la implementación de los métodos en `api.ts`
+
+## 📚 Recursos
+
+- [Documentación de Astro](https://docs.astro.build)
+- [Guía de Tailwind CSS](https://tailwindcss.com/docs)
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
