@@ -64,6 +64,34 @@ Para información completa sobre la implementación, arquitectura y característ
 | `npm run preview`         | Previsualiza la build localmente               |
 | `npm run astro ...`       | Ejecuta comandos CLI como `astro add`, `astro check` |
 
+## 📋 Sistema de Versionado CalVer
+
+Este proyecto utiliza [Calendar Versioning (CalVer)](https://calver.org/) con formato `YYYY.MM.DD`:
+
+| Comando                   | Acción                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm run release`         | Generar nueva versión basada en fecha actual    |
+| `npm run release:today`   | Generar versión con fecha de hoy (YYYY.MM.DD)   |
+
+### 🗓️ Formato de Versión
+
+```bash
+# Formato: YYYY.MM.DD
+2025.06.05  # Versión del 5 de junio de 2025
+2025.12.31  # Versión del 31 de diciembre de 2025
+```
+
+### 🚀 Releases en GitHub
+
+Los releases se crean manualmente desde GitHub Actions:
+1. Ve a la pestaña **Actions** en GitHub
+2. Selecciona **🚀 Release Manual**
+3. Clic en **Run workflow**
+4. Agrega una descripción opcional
+5. El sistema generará automáticamente la versión basada en la fecha actual
+
+👉 **[Ver Changelog](./CHANGELOG.md)**
+
 ## 🎨 Tecnologías Utilizadas
 
 - **[Astro](https://astro.build)**: Framework web moderno

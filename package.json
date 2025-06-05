@@ -1,12 +1,14 @@
 {
-  "name": "nebulous-trappist",
+  "name": "portfolio-mdq123456",
   "type": "module",
-  "version": "0.0.1",
+  "version": "2025.06.05",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "release": "npm run release:today",
+    "release:today": "npm version $(date +'%Y.%m.%d') && git push --follow-tags"
   },
   "dependencies": {
     "@tailwindcss/vite": "4.1.7",

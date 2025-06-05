@@ -1,5 +1,7 @@
 ---
 import './../global.css';
+
+const {title = 'diegodeitu'} = Astro.props;
 ---
 
 <!doctype html>
@@ -9,7 +11,7 @@ import './../global.css';
     <meta name='generator' content={Astro.generator} />
     <meta name='viewport' content='width=device-width' />
     <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-    <title>¡Hola! q onda? 👀</title>
+    <title>{title}</title>
   </head>
 </html>
 <body>
