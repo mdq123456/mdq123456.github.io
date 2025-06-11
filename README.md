@@ -2,17 +2,32 @@
 
 > 🚀 **Portfolio moderno y responsivo construido con Astro, TypeScript y Tailwind CSS**
 
-Un portfolio profesional completo con arquitectura escalable, diseño moderno y estructura preparada para migración a APIs externas.
+Un portfolio profesional completo con arquitectura escalable, diseño moderno y sistema de diseño integrado con Storybook.
 
 ## ✨ Características
 
 - **Diseño Responsivo**: Adaptable a todos los dispositivos
+- **Sistema de Diseño Integrado**: Storybook embebido para documentación de componentes
 - **Arquitectura Escalable**: Mock API preparada para migración a servicios externos (Supabase, etc.)
 - **TypeScript**: Tipado fuerte para mejor mantenibilidad
 - **Tailwind CSS**: Styling moderno y eficiente
 - **Secciones Completas**: Hero, Skills, Timeline, Projects, Contact
 - **Tooltips Interactivos**: Explicaciones detalladas de soft skills
 - **Animaciones Suaves**: Transiciones profesionales y elegantes
+- **WCAG 2.1 AA**: 100% accesibilidad compliance
+
+## 🎨 Sistema de Diseño
+
+El proyecto incluye un sistema de diseño completo con Storybook integrado:
+
+- **Catálogo de Componentes**: Accesible en `/catalogo-de-componentes`
+- **Documentación Viva**: Stories automáticamente sincronizadas
+- **Componentes Reutilizables**: Arquitectura modular escalable
+- **Hot Reloading**: Desarrollo fluido con un solo comando
+
+**Quick Start**: `npm run dev` - Inicia portfolio + catálogo integrado
+
+📖 **Documentación completa**: [SISTEMA-DISENO.md](./SISTEMA-DISENO.md)
 
 ## 🏗️ Arquitectura del Proyecto
 
@@ -37,11 +52,13 @@ Un portfolio profesional completo con arquitectura escalable, diseño moderno y 
 └── package.json
 ```
 
-### 📋 Documentación Detallada
+### 📖 Documentación
 
-Para información completa sobre la implementación, arquitectura y características:
-
-👉 **[Ver Documentación Completa](./PORTFOLIO.md)**
+- **🏗️ Arquitectura y Técnicas**: [`docs/PORTFOLIO.md`](./docs/PORTFOLIO.md)
+- **🎨 Sistema de Diseño**: [`docs/SISTEMA-DISENO.md`](./docs/SISTEMA-DISENO.md)
+- **🤝 Guía de Contribución**: [`docs/CONTRIBUTING.md`](./docs/CONTRIBUTING.md)
+- **🧩 Desarrollo de Componentes**: [`docs/COMPONENTS.md`](./docs/COMPONENTS.md)
+- **🔄 Historial de Cambios**: [`docs/CHANGELOG.md`](./docs/CHANGELOG.md)
 
 ## 🚀 Secciones del Portfolio
 

@@ -1,11 +1,24 @@
-# 🚀 Scripts de Desarrollo
+# 🤝 Guía de Contribución
 
-## ⚡ Lo Más Usado
+## 🎯 Areas de Contribución
+
+### 🎨 **Design System y Componentes**
+Para contribuir al catálogo de componentes y design system:
+**📋 [Ver Guía Específica de Componentes](./src/components/CONTRIBUTING.md)**
+
+### 💻 **Portfolio y Desarrollo General**
+Sigue esta guía para desarrollo general del portfolio.
+
+---
+
+## ⚡ Scripts de Desarrollo Principales
+
+### **Lo Más Usado**
 
 ```bash
 # Desarrollo diario
-npm run dev                  # Servidor desarrollo
-npm run test:full           # Test completo (build + a11y todos los temas)
+npm run dev                  # Servidor desarrollo con catálogo integrado
+npm run test:full           # Test completo (build + a11y todos los temas)  
 npm run server:restart      # Si algo se rompe
 
 # Release
