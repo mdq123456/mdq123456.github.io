@@ -8,7 +8,11 @@
     "preview": "astro preview",
     "astro": "astro",
     "release": "npm run release:today",
-    "release:today": "npm version $(date +'%Y.%m.%d') && git push --follow-tags"
+    "release:today": "npm version $(date +'%Y.%m.%d') && git push --follow-tags",
+    "a11y": "npm run build && npm run preview & sleep 5 && npx tsx scripts/accessibility-test.ts",
+    "a11y:ci": "npx tsx scripts/accessibility-test.ts",
+    "type-check": "tsc --noEmit",
+    "type-check:scripts": "tsc --project tsconfig.scripts.json --noEmit"
   },
   "dependencies": {
     "@tailwindcss/vite": "4.1.7",
@@ -16,6 +20,14 @@
     "tailwindcss": "4.1.7"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.16"
+    "@axe-core/playwright": "^4.10.2",
+    "@tailwindcss/typography": "^0.5.16",
+    "@types/node": "^24.0.0",
+    "axe-core": "^4.10.3",
+    "lighthouse": "^12.6.1",
+    "playwright": "^1.53.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.0",
+    "typescript": "^5.8.3"
   }
 }

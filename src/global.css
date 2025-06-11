@@ -1,1 +1,257 @@
 @import "tailwindcss";
+
+/* Variables de temas */
+:root {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-accent: #eff6ff;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-accent: #3b82f6;
+  --border-color: #e2e8f0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-accent: #334155;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-accent: #60a5fa;
+  --border-color: #475569;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="print"] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #ffffff;
+  --bg-accent: #f9f9f9;
+  --text-primary: #000000;
+  --text-secondary: #333333;
+  --text-accent: #000000;
+  --border-color: #000000;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos base */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Tema oscuro - Mejoras de accesibilidad */
+[data-theme="dark"] .bg-gradient-to-br {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%) !important;
+}
+
+[data-theme="dark"] .bg-white {
+  background-color: var(--bg-secondary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .text-slate-600,
+[data-theme="dark"] .text-gray-600 {
+  color: #cbd5e1 !important; /* Mejor contraste */
+}
+
+[data-theme="dark"] .text-slate-800,
+[data-theme="dark"] .text-gray-800 {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .text-slate-700 {
+  color: #e2e8f0 !important; /* Mejor contraste */
+}
+
+[data-theme="dark"] .shadow-lg,
+[data-theme="dark"] .shadow-xl {
+  box-shadow: 0 10px 25px var(--shadow-color) !important;
+}
+
+/* Mejoras específicas para skills con mejor contraste */
+[data-theme="dark"] .bg-blue-50 {
+  background-color: #1e3a8a !important;
+  color: #dbeafe !important;
+}
+
+[data-theme="dark"] .text-blue-700 {
+  color: #dbeafe !important;
+}
+
+[data-theme="dark"] .bg-purple-50 {
+  background-color: #6b21a8 !important;
+  color: #f3e8ff !important;
+}
+
+[data-theme="dark"] .text-purple-700 {
+  color: #f3e8ff !important;
+}
+
+[data-theme="dark"] .bg-green-50 {
+  background-color: #14532d !important;
+  color: #dcfce7 !important;
+}
+
+[data-theme="dark"] .text-green-700 {
+  color: #dcfce7 !important;
+}
+
+/* Mejoras específicas para soft skills en tema oscuro */
+[data-theme="dark"] .bg-gradient-to-r.from-blue-50.to-purple-50 {
+  background: linear-gradient(90deg, #334155 0%, #475569 100%) !important;
+}
+
+[data-theme="dark"] .bg-slate-800 {
+  background-color: #0f172a !important;
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .bg-slate-800 .text-white {
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .border-t-slate-800 {
+  border-top-color: #0f172a !important;
+}
+
+/* Mejorar contraste de tooltips en tema oscuro */
+[data-theme="dark"] .bg-gray-900 {
+  background-color: #111827 !important;
+  border-color: #374151 !important;
+}
+
+[data-theme="dark"] .border-t-gray-900 {
+  border-top-color: #111827 !important;
+}
+
+[data-theme="dark"] .group:hover .bg-gray-900,
+[data-theme="dark"] .group:focus .bg-gray-900 {
+  background-color: #111827 !important;
+  color: #f9fafb !important;
+}
+
+[data-theme="dark"] .bg-blue-600 {
+  background-color: #3b82f6 !important;
+}
+
+[data-theme="dark"] .hover\:bg-blue-700:hover {
+  background-color: #2563eb !important;
+}
+
+/* Mejoras de accesibilidad para focus */
+[data-theme="dark"] .focus\:ring-blue-500:focus {
+  --tw-ring-color: #60a5fa !important;
+}
+
+/* Asegurar que los tooltips sean legibles en todos los temas */
+.group:hover [role="tooltip"],
+.group:focus [role="tooltip"] {
+  display: block;
+}
+
+[data-theme="print"] [role="tooltip"] {
+  display: none !important;
+}
+
+/* Tema de impresión - Estilo máquina de escribir */
+[data-theme="print"] {
+  font-family: 'Courier New', 'Courier', monospace !important;
+}
+
+[data-theme="print"] .bg-gradient-to-br,
+[data-theme="print"] .bg-gradient-to-r {
+  background: var(--bg-primary) !important;
+}
+
+[data-theme="print"] .bg-white {
+  background-color: var(--bg-secondary) !important;
+  border: 2px solid var(--border-color) !important;
+}
+
+[data-theme="print"] .text-6xl {
+  font-size: 3rem !important;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+}
+
+[data-theme="print"] .bg-clip-text,
+[data-theme="print"] .text-transparent {
+  background: none !important;
+  color: var(--text-primary) !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+}
+
+[data-theme="print"] .rounded-lg,
+[data-theme="print"] .rounded-xl,
+[data-theme="print"] .rounded-2xl {
+  border-radius: 0 !important;
+}
+
+[data-theme="print"] .shadow-lg,
+[data-theme="print"] .shadow-xl {
+  box-shadow: none !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+[data-theme="print"] .animate-pulse,
+[data-theme="print"] .animate-bounce {
+  animation: none !important;
+}
+
+[data-theme="print"] .hidden-print {
+  display: none !important;
+}
+
+/* Estilos de impresión */
+@media print {
+  .print\:hidden {
+    display: none !important;
+  }
+  
+  .theme-selector {
+    display: none !important;
+  }
+  
+  body {
+    font-family: 'Courier New', 'Courier', monospace !important;
+    background: white !important;
+    color: black !important;
+  }
+  
+  .bg-gradient-to-br,
+  .bg-gradient-to-r {
+    background: white !important;
+  }
+  
+  .shadow-lg,
+  .shadow-xl {
+    box-shadow: none !important;
+    border: 1px solid black !important;
+  }
+  
+  .rounded-lg,
+  .rounded-xl,
+  .rounded-2xl {
+    border-radius: 0 !important;
+  }
+  
+  .text-6xl {
+    font-size: 2.5rem !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+  }
+  
+  .bg-clip-text,
+  .text-transparent {
+    background: none !important;
+    color: black !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+  }
+}
