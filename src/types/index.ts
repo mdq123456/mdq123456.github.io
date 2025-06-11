@@ -11,22 +11,23 @@ export interface Skill {
 
 export interface SkillCategories {
   technical: string[];
-  soft: Skill[];
+  frameworks: string[];
+  tools: string[];
+  soft: Record<string, string>;
 }
 
 export interface TimelineItem {
   period: string;
-  role: string;
-  highlights: string[];
-  technologies: string[];
-  achievements: string;
-  company: string;
+  title: string;
+  description: string;
+  technologies?: string[];
+  achievements?: string;
 }
 
 export interface Project {
   title: string;
   description: string;
-  link: string;
+  technologies: string[];
+  link?: string;
   year?: number;
-  tech: string[];
 }
