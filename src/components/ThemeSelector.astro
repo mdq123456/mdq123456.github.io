@@ -5,87 +5,95 @@
 <div class='theme-selector fixed top-4 right-4 z-50 print:hidden'>
   <div class='relative'>
     <!-- Botón principal -->
-    <button 
-      id='theme-toggle' 
+    <button
+      id='theme-toggle'
       class='w-12 h-12 rounded-full bg-white/90 backdrop-blur-sm shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 flex items-center justify-center group'
       title='Cambiar tema'
       aria-label='Selector de tema'
     >
-      <svg id='theme-icon' class='w-6 h-6 text-gray-700 group-hover:text-gray-900 transition-colors' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z'></path>
+      <svg
+        id='theme-icon'
+        class='w-6 h-6 text-gray-700 group-hover:text-gray-900 transition-colors'
+        fill='none'
+        stroke='currentColor'
+        viewBox='0 0 24 24'
+      >
+        <path
+          stroke-linecap='round'
+          stroke-linejoin='round'
+          stroke-width='2'
+          d='M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z'
+        ></path>
       </svg>
     </button>
-    
+
     <!-- Menú desplegable -->
-    <div 
-      id='theme-menu' 
+    <div
+      id='theme-menu'
       class='absolute top-full right-0 mt-2 bg-white/95 backdrop-blur-sm rounded-lg shadow-xl border border-gray-200 p-2 min-w-[160px] opacity-0 invisible transform scale-95 transition-all duration-200 origin-top-right'
     >
-      <button 
-        id='theme-light' 
+      <button
+        id='theme-light'
         class='theme-option w-full flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100 transition-colors text-left text-gray-700 hover:text-gray-900'
         data-theme='light'
       >
-        <div class='w-4 h-4 rounded-full bg-gradient-to-br from-blue-400 to-cyan-300 border border-blue-500'></div>
+        <div
+          class='w-4 h-4 rounded-full bg-gradient-to-br from-blue-400 to-cyan-300 border border-blue-500'
+        >
+        </div>
         <span class='text-sm font-medium'>Tema Claro</span>
       </button>
-      
-      <button 
-        id='theme-dark' 
+
+      <button
+        id='theme-dark'
         class='theme-option w-full flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100 transition-colors text-left text-gray-700 hover:text-gray-900'
         data-theme='dark'
       >
-        <div class='w-4 h-4 rounded-full bg-gradient-to-br from-slate-700 to-slate-900 border border-slate-600'></div>
+        <div
+          class='w-4 h-4 rounded-full bg-gradient-to-br from-slate-700 to-slate-900 border border-slate-600'
+        >
+        </div>
         <span class='text-sm font-medium'>Tema Oscuro</span>
-      </button>
-      
-      <button 
-        id='theme-print' 
-        class='theme-option w-full flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100 transition-colors text-left text-gray-700 hover:text-gray-900'
-        data-theme='print'
-      >
-        <div class='w-4 h-4 rounded-full bg-white border-2 border-gray-700'></div>
-        <span class='text-sm font-medium'>Vista CV</span>
       </button>
     </div>
   </div>
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     const themeToggle = document.getElementById('theme-toggle');
     const themeMenu = document.getElementById('theme-menu');
     const themeIcon = document.getElementById('theme-icon');
     const themeOptions = document.querySelectorAll('.theme-option');
     const body = document.body;
-    
+
     let isMenuOpen = false;
-    
+
     // Cargar tema guardado
     const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
     setTheme(savedTheme);
-    
+
     // Toggle del menú
-    themeToggle?.addEventListener('click', function(e) {
+    themeToggle?.addEventListener('click', function (e) {
       e.stopPropagation();
       toggleMenu();
     });
-    
+
     // Cerrar menú al hacer click fuera
-    document.addEventListener('click', function() {
+    document.addEventListener('click', function () {
       if (isMenuOpen) {
         closeMenu();
       }
     });
-    
+
     // Prevenir cierre al hacer click en el menú
-    themeMenu?.addEventListener('click', function(e) {
+    themeMenu?.addEventListener('click', function (e) {
       e.stopPropagation();
     });
-    
+
     // Opciones de tema
-    themeOptions.forEach(option => {
-      option.addEventListener('click', function() {
+    themeOptions.forEach((option) => {
+      option.addEventListener('click', function () {
         const theme = this.getAttribute('data-theme');
         if (theme) {
           setTheme(theme);
@@ -93,7 +101,7 @@
         }
       });
     });
-    
+
     function toggleMenu() {
       if (isMenuOpen) {
         closeMenu();
@@ -101,40 +109,39 @@
         openMenu();
       }
     }
-    
+
     function openMenu() {
       isMenuOpen = true;
       themeMenu?.classList.remove('opacity-0', 'invisible', 'scale-95');
       themeMenu?.classList.add('opacity-100', 'visible', 'scale-100');
     }
-    
+
     function closeMenu() {
       isMenuOpen = false;
       themeMenu?.classList.remove('opacity-100', 'visible', 'scale-100');
       themeMenu?.classList.add('opacity-0', 'invisible', 'scale-95');
     }
-    
+
     function setTheme(theme: string) {
       body.setAttribute('data-theme', theme);
       localStorage.setItem('portfolio-theme', theme);
       updateIcon(theme);
       updateActiveOption(theme);
     }
-    
+
     function updateIcon(theme: string) {
       if (!themeIcon) return;
-      
+
       const icons = {
         light: `<path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z'></path>`,
         dark: `<path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z'></path>`,
-        print: `<path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z'></path>`
       };
-      
+
       themeIcon.innerHTML = icons[theme] || icons.light;
     }
-    
+
     function updateActiveOption(theme: string) {
-      themeOptions.forEach(option => {
+      themeOptions.forEach((option) => {
         option.classList.remove('bg-blue-50', 'text-blue-700');
         if (option.getAttribute('data-theme') === theme) {
           option.classList.add('bg-blue-50', 'text-blue-700');
@@ -148,7 +155,7 @@
   .theme-selector {
     animation: slideIn 0.3s ease-out;
   }
-  
+
   @keyframes slideIn {
     from {
       transform: translateX(100%);

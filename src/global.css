@@ -16,22 +16,14 @@
   --bg-primary: #0f172a;
   --bg-secondary: #1e293b;
   --bg-accent: #334155;
-  --text-primary: #f1f5f9;
-  --text-secondary: #cbd5e1;
-  --text-accent: #60a5fa;
+  --text-primary: #f8fafc;
+  /* Mejorado de #f1f5f9 a #f8fafc para mejor contraste */
+  --text-secondary: #e2e8f0;
+  /* Mejorado de #cbd5e1 a #e2e8f0 para mejor contraste */
+  --text-accent: #7dd3fc;
+  /* Mejorado de #60a5fa a #7dd3fc para mejor contraste */
   --border-color: #475569;
   --shadow-color: rgba(0, 0, 0, 0.3);
-}
-
-[data-theme="print"] {
-  --bg-primary: #ffffff;
-  --bg-secondary: #ffffff;
-  --bg-accent: #f9f9f9;
-  --text-primary: #000000;
-  --text-secondary: #333333;
-  --text-accent: #000000;
-  --border-color: #000000;
-  --shadow-color: rgba(0, 0, 0, 0.2);
 }
 
 /* Estilos base */
@@ -39,6 +31,19 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Mejoras de contraste generales */
+.bg-pink-50 .text-gray-600,
+.bg-pink-50 .text-slate-600 {
+  color: #1f2937 !important;
+  /* Cambiado de #374151 a #1f2937 para mejor contraste */
+}
+
+/* Mejoras específicas para elementos con border-blue-200 */
+.border-blue-200 {
+  border-color: #3b82f6 !important;
+  /* Mejor contraste */
 }
 
 /* Tema oscuro - Mejoras de accesibilidad */
@@ -54,7 +59,8 @@ body {
 
 [data-theme="dark"] .text-slate-600,
 [data-theme="dark"] .text-gray-600 {
-  color: #cbd5e1 !important; /* Mejor contraste */
+  color: #cbd5e1 !important;
+  /* Mejor contraste */
 }
 
 [data-theme="dark"] .text-slate-800,
@@ -63,7 +69,8 @@ body {
 }
 
 [data-theme="dark"] .text-slate-700 {
-  color: #e2e8f0 !important; /* Mejor contraste */
+  color: #e2e8f0 !important;
+  /* Mejor contraste */
 }
 
 [data-theme="dark"] .shadow-lg,
@@ -74,11 +81,14 @@ body {
 /* Mejoras específicas para skills con mejor contraste */
 [data-theme="dark"] .bg-blue-50 {
   background-color: #1e3a8a !important;
-  color: #dbeafe !important;
+  color: #bfdbfe !important;
+  /* Cambiado de #dbeafe a #bfdbfe para mejor contraste */
 }
 
+[data-theme="dark"] .text-blue-600,
 [data-theme="dark"] .text-blue-700 {
-  color: #dbeafe !important;
+  color: #93c5fd !important;
+  /* Cambiado de #60a5fa a #93c5fd para mejor contraste */
 }
 
 [data-theme="dark"] .bg-purple-50 {
@@ -97,6 +107,74 @@ body {
 
 [data-theme="dark"] .text-green-700 {
   color: #dcfce7 !important;
+}
+
+/* Corregir fondos claros en tema oscuro */
+[data-theme="dark"] .bg-pink-50 {
+  background-color: #701a75 !important;
+  /* Cambiado de #831843 a #701a75 para mejor contraste */
+  color: #fdf2f8 !important;
+  /* Color más claro para mejor contraste */
+}
+
+[data-theme="dark"] .bg-gray-50,
+[data-theme="dark"] .bg-slate-50 {
+  background-color: #334155 !important;
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .bg-slate-100 {
+  background-color: #475569 !important;
+  /* Fondo más oscuro */
+  color: #f8fafc !important;
+  /* Texto más claro */
+}
+
+/* Corregir elementos con fondos específicos de colores claros */
+[data-theme="dark"] .bg-pink-50 .text-gray-600,
+[data-theme="dark"] .bg-pink-50 .text-slate-600 {
+  color: #fdf2f8 !important;
+  /* Mejorado para mejor contraste */
+}
+
+[data-theme="dark"] .bg-gray-50 .text-gray-600,
+[data-theme="dark"] .bg-slate-50 .text-slate-600 {
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .bg-slate-100 .text-gray-600,
+[data-theme="dark"] .bg-slate-100 .text-slate-600 {
+  color: #f8fafc !important;
+  /* Mejor contraste para bg-slate-100 */
+}
+
+/* Asegurar que los elementos con texto sobre fondos claros tengan buen contraste en tema oscuro */
+[data-theme="dark"] .px-2.rounded.text-xs {
+  background-color: #334155 !important;
+  color: #e2e8f0 !important;
+  border: 1px solid #475569 !important;
+}
+
+/* Corregir borders y elementos azules en tema oscuro */
+[data-theme="dark"] .border-blue-200 {
+  border-color: #1e40af !important;
+  background-color: #1e3a8a !important;
+  color: #bfdbfe !important;
+}
+
+[data-theme="dark"] .hover\:bg-blue-100 {
+  background-color: #1e3a8a !important;
+}
+
+[data-theme="dark"] .hover\:bg-blue-100:hover {
+  background-color: #1e40af !important;
+}
+
+[data-theme="dark"] .bg-blue-600 {
+  background-color: #1e40af !important;
+  /* Fondo más oscuro para mejor contraste */
+  color: #f8fafc !important;
+  /* Texto más claro */
 }
 
 /* Mejoras específicas para soft skills en tema oscuro */
@@ -152,101 +230,46 @@ body {
   display: block;
 }
 
-[data-theme="print"] [role="tooltip"] {
-  display: none !important;
-}
-
-/* Tema de impresión - Estilo máquina de escribir */
-[data-theme="print"] {
-  font-family: 'Courier New', 'Courier', monospace !important;
-}
-
-[data-theme="print"] .bg-gradient-to-br,
-[data-theme="print"] .bg-gradient-to-r {
-  background: var(--bg-primary) !important;
-}
-
-[data-theme="print"] .bg-white {
-  background-color: var(--bg-secondary) !important;
-  border: 2px solid var(--border-color) !important;
-}
-
-[data-theme="print"] .text-6xl {
-  font-size: 3rem !important;
-  font-weight: bold !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.1em !important;
-}
-
-[data-theme="print"] .bg-clip-text,
-[data-theme="print"] .text-transparent {
-  background: none !important;
-  color: var(--text-primary) !important;
-  -webkit-background-clip: unset !important;
-  background-clip: unset !important;
-}
-
-[data-theme="print"] .rounded-lg,
-[data-theme="print"] .rounded-xl,
-[data-theme="print"] .rounded-2xl {
-  border-radius: 0 !important;
-}
-
-[data-theme="print"] .shadow-lg,
-[data-theme="print"] .shadow-xl {
-  box-shadow: none !important;
-  border: 1px solid var(--border-color) !important;
-}
-
-[data-theme="print"] .animate-pulse,
-[data-theme="print"] .animate-bounce {
-  animation: none !important;
-}
-
-[data-theme="print"] .hidden-print {
-  display: none !important;
-}
-
 /* Estilos de impresión */
 @media print {
   .print\:hidden {
     display: none !important;
   }
-  
+
   .theme-selector {
     display: none !important;
   }
-  
+
   body {
     font-family: 'Courier New', 'Courier', monospace !important;
     background: white !important;
     color: black !important;
   }
-  
+
   .bg-gradient-to-br,
   .bg-gradient-to-r {
     background: white !important;
   }
-  
+
   .shadow-lg,
   .shadow-xl {
     box-shadow: none !important;
     border: 1px solid black !important;
   }
-  
+
   .rounded-lg,
   .rounded-xl,
   .rounded-2xl {
     border-radius: 0 !important;
   }
-  
+
   .text-6xl {
     font-size: 2.5rem !important;
     font-weight: bold !important;
     text-transform: uppercase !important;
     letter-spacing: 0.1em !important;
   }
-  
+
   .bg-clip-text,
   .text-transparent {
     background: none !important;

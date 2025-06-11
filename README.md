@@ -107,6 +107,10 @@ El proyecto está preparado para migración fácil a APIs externas como Supabase
 2. La capa de servicios en `/src/services/api.ts` abstrae la fuente de datos
 3. Solo requiere cambiar la implementación de los métodos en `api.ts`
 
+## 🚀 Scripts Útiles
+
+Para desarrollo y testing rápido, ver **[📋 CONTRIBUTING.md](CONTRIBUTING.md)** con los comandos más usados.
+
 ## 📚 Recursos
 
 - [Documentación de Astro](https://docs.astro.build)

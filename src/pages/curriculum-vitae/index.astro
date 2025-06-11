@@ -1,0 +1,335 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import {api} from '../../services/api';
+
+// Obtener datos
+const profile = await api.getProfile();
+const skillCategories = await api.getSkills();
+const timeline = await api.getTimeline();
+const projects = await api.getProjects();
+---
+
+<Layout title={`Curriculum Vitae - ${profile.name}`}>
+  <style>
+    /* Estilos específicos para impresión - tipo Google Docs */
+    @media print {
+      body {
+        font-size: 11px !important;
+        line-height: 1.15 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-break {
+        page-break-before: always;
+      }
+      .print-avoid-break {
+        page-break-inside: avoid;
+      }
+      .cv-container {
+        box-shadow: none !important;
+        margin: 1.27cm 1.27cm 1.27cm 1.27cm !important; /* Márgenes A4 estándar */
+        max-width: none !important;
+        background: white !important;
+        padding: 0 !important;
+      }
+      .cv-content {
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+    }
+
+    @media screen {
+      .cv-container {
+        max-width: 21cm; /* Ancho A4 */
+        min-height: 29.7cm; /* Alto A4 */
+        margin: 2rem auto;
+        padding: 1.27cm; /* Simular márgenes de Google Docs */
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        background: white;
+      }
+    }
+  </style>
+  <!-- Navegación de regreso -->
+  <a
+    href='/'
+    class='no-print fixed top-4 left-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 shadow-lg z-50'
+  >
+    ← Volver al Portfolio
+  </a>
+
+  <!-- Contenedor principal del CV -->
+  <div
+    class='cv-container bg-gray-50 min-h-screen print:bg-white print:min-h-0'
+  >
+    <div class='cv-content'>
+      <!-- Header -->
+      <header
+        class='text-center border-b-2 border-blue-600 pb-6 mb-8 print-avoid-break'
+      >
+        <h1 class='text-4xl font-bold text-blue-800 mb-2 print:text-2xl'>
+          {profile.name}
+        </h1>
+        <h2 class='text-xl text-gray-600 mb-4 print:text-base'>
+          {profile.role}
+        </h2>
+        <div
+          class='flex flex-wrap justify-center gap-6 text-sm text-gray-700 print:gap-3 print:text-xs'
+        >
+          <span class='flex items-center'>
+            <span class='mr-1'>📧</span>
+            diegodeitu@gmail.com
+          </span>
+          <span class='flex items-center'>
+            <span class='mr-1'>🌐</span>
+            diegodeitu.dev
+          </span>
+          <span class='flex items-center'>
+            <span class='mr-1'>💼</span>
+            linkedin.com/in/diegoquintana
+          </span>
+          <span class='flex items-center'>
+            <span class='mr-1'>🐙</span>
+            github.com/mdq123456
+          </span>
+        </div>
+      </header>
+
+      <!-- Perfil Profesional -->
+      <section class='mb-8 print-avoid-break print:mb-4'>
+        <h3
+          class='text-lg font-bold text-blue-800 border-b border-gray-300 pb-1 mb-4 uppercase tracking-wide print:text-base print:mb-2'
+        >
+          Perfil Profesional
+        </h3>
+        <div
+          class='space-y-3 text-sm text-justify leading-relaxed print:space-y-2 print:text-xs'
+        >
+          {profile.bio.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+      </section>
+
+      <!-- Experiencia Profesional -->
+      <section class='mb-8 print:mb-4'>
+        <h3
+          class='text-lg font-bold text-blue-800 border-b border-gray-300 pb-1 mb-4 uppercase tracking-wide print:text-base print:mb-2'
+        >
+          Experiencia Profesional
+        </h3>
+        <div class='space-y-5 print:space-y-3'>
+          {
+            timeline.map((job) => (
+              <div class='print-avoid-break'>
+                <div class='flex justify-between items-baseline mb-1'>
+                  <h4 class='font-bold text-blue-700 print:text-sm'>
+                    {job.title}
+                  </h4>
+                  <span class='text-sm text-gray-600 font-medium print:text-xs'>
+                    {job.period}
+                  </span>
+                </div>
+                <p class='text-sm text-justify leading-relaxed mb-2 print:text-xs print:mb-1'>
+                  {job.description}
+                </p>
+                {job.technologies && job.technologies.length > 0 && (
+                  <div class='mb-2 print:mb-1'>
+                    <span class='text-xs font-semibold text-gray-700 mr-2 print:text-xs'>
+                      Tecnologías:
+                    </span>
+                    <div class='inline-flex flex-wrap gap-1'>
+                      {job.technologies.map((tech) => (
+                        <span class='bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs border print:px-1 print:py-0 print:text-xs'>
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {job.achievements && (
+                  <div class='text-xs text-gray-600 bg-blue-50 p-2 rounded border-l-2 border-blue-300 print:p-1 print:text-xs'>
+                    <span class='font-semibold'>Logro destacado:</span>{' '}
+                    {job.achievements}
+                  </div>
+                )}
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Habilidades Técnicas -->
+      <section class='mb-8 print-avoid-break print:mb-4'>
+        <h3
+          class='text-lg font-bold text-blue-800 border-b border-gray-300 pb-1 mb-4 uppercase tracking-wide print:text-base print:mb-2'
+        >
+          Habilidades Técnicas
+        </h3>
+        <div class='grid grid-cols-1 md:grid-cols-2 gap-6 print:gap-3'>
+          <!-- Tecnologías Principales -->
+          <div class='print-avoid-break'>
+            <h4
+              class='font-semibold text-blue-700 mb-3 print:text-sm print:mb-2'
+            >
+              Lenguajes y Frameworks
+            </h4>
+            <div class='flex flex-wrap gap-2 print:gap-1'>
+              {
+                skillCategories.technical
+                  .slice(0, 12)
+                  .map((skill) => (
+                    <span class='bg-blue-50 text-blue-800 px-3 py-1 rounded-full text-xs border border-blue-200 print:px-2 print:py-0'>
+                      {skill}
+                    </span>
+                  ))
+              }
+            </div>
+          </div>
+
+          <!-- Herramientas -->
+          <div class='print-avoid-break'>
+            <h4
+              class='font-semibold text-blue-700 mb-3 print:text-sm print:mb-2'
+            >
+              Herramientas y Plataformas
+            </h4>
+            <div class='flex flex-wrap gap-2 print:gap-1'>
+              {
+                skillCategories.tools
+                  .slice(0, 8)
+                  .map((tool) => (
+                    <span class='bg-green-50 text-green-800 px-3 py-1 rounded-full text-xs border border-green-200 print:px-2 print:py-0'>
+                      {tool}
+                    </span>
+                  ))
+              }
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Proyectos Destacados -->
+      <section class='mb-8 print:mb-4'>
+        <h3
+          class='text-lg font-bold text-blue-800 border-b border-gray-300 pb-1 mb-4 uppercase tracking-wide print:text-base print:mb-2'
+        >
+          Proyectos Destacados
+        </h3>
+        <div class='space-y-4 print:space-y-2'>
+          {
+            projects.slice(0, 3).map((project) => (
+              <div class='print-avoid-break'>
+                <div class='flex justify-between items-baseline mb-1'>
+                  <h4 class='font-bold text-blue-700 print:text-sm'>
+                    {project.title}
+                  </h4>
+                  {project.year && (
+                    <span class='text-sm text-gray-600 print:text-xs'>
+                      {project.year}
+                    </span>
+                  )}
+                </div>
+                <p class='text-sm text-justify leading-relaxed mb-2 print:text-xs print:mb-1'>
+                  {project.description}
+                </p>
+                <div>
+                  <span class='text-xs font-semibold text-gray-700 mr-2'>
+                    Stack técnico:
+                  </span>
+                  <div class='inline-flex flex-wrap gap-1'>
+                    {project.technologies.map((tech) => (
+                      <span class='bg-purple-50 text-purple-800 px-2 py-1 rounded text-xs border border-purple-200 print:px-1 print:py-0'>
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Habilidades Interpersonales -->
+      <section class='mb-8 print-avoid-break print:mb-4'>
+        <h3
+          class='text-lg font-bold text-blue-800 border-b border-gray-300 pb-1 mb-4 uppercase tracking-wide print:text-base print:mb-2'
+        >
+          Competencias Profesionales
+        </h3>
+        <div class='grid grid-cols-1 md:grid-cols-2 gap-4 print:gap-2'>
+          {
+            Object.entries(skillCategories.soft)
+              .slice(0, 6)
+              .map(([skillName, description]) => (
+                <div class='print-avoid-break'>
+                  <h4 class='font-semibold text-orange-700 text-sm mb-1 print:text-xs'>
+                    {skillName}
+                  </h4>
+                  <p class='text-xs text-gray-600 leading-relaxed print:text-xs'>
+                    {description}
+                  </p>
+                </div>
+              ))
+          }
+        </div>
+      </section>
+
+      <!-- Educación y Desarrollo -->
+      <section class='print-avoid-break'>
+        <h3
+          class='text-lg font-bold text-blue-800 border-b border-gray-300 pb-1 mb-4 uppercase tracking-wide print:text-base print:mb-2'
+        >
+          Educación y Desarrollo Profesional
+        </h3>
+        <div>
+          <div class='flex justify-between items-baseline mb-1'>
+            <h4 class='font-bold text-blue-700 print:text-sm'>
+              Autoformación Continua en Tecnologías Web
+            </h4>
+            <span class='text-sm text-gray-600 font-medium print:text-xs'
+              >2014 - Presente</span
+            >
+          </div>
+          <p class='text-sm text-justify leading-relaxed print:text-xs'>
+            Desarrollo profesional autodidacta enfocado en tecnologías web
+            modernas, mejores prácticas de desarrollo y arquitecturas
+            escalables. Constante actualización en frameworks, herramientas y
+            metodologías de la industria a través de cursos online,
+            documentación oficial y proyectos prácticos.
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Script para mejorar la impresión -->
+  <script>
+    // Optimizar para impresión
+    window.addEventListener('beforeprint', () => {
+      document.body.classList.add('print-mode');
+      // Agregar márgenes tipo Google Docs
+      const style = document.createElement('style');
+      style.textContent = `
+        @page {
+          margin: 1.27cm 1.27cm 1.27cm 1.27cm;
+          size: A4;
+        }
+      `;
+      document.head.appendChild(style);
+    });
+
+    window.addEventListener('afterprint', () => {
+      document.body.classList.remove('print-mode');
+    });
+
+    // Atajo de teclado para imprimir
+    document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.key === 'p') {
+        e.preventDefault();
+        window.print();
+      }
+    });
+  </script>
+</Layout>

@@ -42,8 +42,31 @@ const projects = await api.getProjects();
           }
         </div>
 
+        <!-- CV Button - Prioritario para recruiters -->
+        <div class='mt-12 mb-8'>
+          <a
+            href='/curriculum-vitae'
+            class='inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl transition-all duration-300 font-bold text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-2 hover:scale-105'
+          >
+            <svg
+              class='w-6 h-6 mr-3'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+            >
+              <path
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'
+              ></path>
+            </svg>
+            📄 Ver Curriculum Vitae
+          </a>
+        </div>
+
         <!-- Scroll indicator -->
-        <div class='mt-16 animate-bounce'>
+        <div class='mt-8 animate-bounce'>
           <svg
             class='w-6 h-6 mx-auto text-blue-500'
             fill='none'
@@ -69,41 +92,135 @@ const projects = await api.getProjects();
         <p class='text-center text-slate-600 mb-8 max-w-2xl mx-auto'>
           Evolución continua desde Visual Basic 6 hasta tecnologías modernas
         </p>
-        <div class='w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-12 rounded-full'></div>
-        
+        <div
+          class='w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-12 rounded-full'
+        >
+        </div>
+
         <!-- Línea de evolución tecnológica -->
-        <div class='mb-12 bg-white rounded-2xl shadow-lg p-6 border border-slate-100'>
-          <h3 class='text-xl font-semibold text-center mb-6 text-slate-800'>Evolución Tecnológica</h3>
+        <div
+          class='mb-12 bg-white rounded-2xl shadow-lg p-6 border border-slate-100'
+        >
+          <h3 class='text-xl font-semibold text-center mb-6 text-slate-800'>
+            Evolución Tecnológica
+          </h3>
           <div class='flex flex-wrap justify-center items-center gap-3 text-sm'>
-            <span class='px-3 py-1 bg-red-50 text-red-700 rounded-full border border-red-200'>VB6</span>
-            <svg class='w-4 h-4 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-              <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 5l7 7-7 7'></path>
+            <span
+              class='px-3 py-1 bg-red-50 text-red-700 rounded-full border border-red-200'
+              >VB6</span
+            >
+            <svg
+              class='w-4 h-4 text-slate-400'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+            >
+              <path
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                d='M9 5l7 7-7 7'></path>
             </svg>
-            <span class='px-3 py-1 bg-orange-50 text-orange-700 rounded-full border border-orange-200'>C#</span>
-            <svg class='w-4 h-4 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-              <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 5l7 7-7 7'></path>
+            <span
+              class='px-3 py-1 bg-orange-50 text-orange-700 rounded-full border border-orange-200'
+              >C#</span
+            >
+            <svg
+              class='w-4 h-4 text-slate-400'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+            >
+              <path
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                d='M9 5l7 7-7 7'></path>
             </svg>
-            <span class='px-3 py-1 bg-yellow-50 text-yellow-700 rounded-full border border-yellow-200'>SQL</span>
-            <svg class='w-4 h-4 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-              <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 5l7 7-7 7'></path>
+            <span
+              class='px-3 py-1 bg-yellow-50 text-yellow-700 rounded-full border border-yellow-200'
+              >SQL</span
+            >
+            <svg
+              class='w-4 h-4 text-slate-400'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+            >
+              <path
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                d='M9 5l7 7-7 7'></path>
             </svg>
-            <span class='px-3 py-1 bg-green-50 text-green-700 rounded-full border border-green-200'>JavaScript</span>
-            <svg class='w-4 h-4 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-              <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 5l7 7-7 7'></path>
+            <span
+              class='px-3 py-1 bg-green-50 text-green-700 rounded-full border border-green-200'
+              >JavaScript</span
+            >
+            <svg
+              class='w-4 h-4 text-slate-400'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+            >
+              <path
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                d='M9 5l7 7-7 7'></path>
             </svg>
-            <span class='px-3 py-1 bg-blue-50 text-blue-700 rounded-full border border-blue-200'>React Native</span>
-            <svg class='w-4 h-4 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-              <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 5l7 7-7 7'></path>
+            <span
+              class='px-3 py-1 bg-blue-50 text-blue-700 rounded-full border border-blue-200'
+              >React Native</span
+            >
+            <svg
+              class='w-4 h-4 text-slate-400'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+            >
+              <path
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                d='M9 5l7 7-7 7'></path>
             </svg>
-            <span class='px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full border border-indigo-200'>TypeScript</span>
-            <svg class='w-4 h-4 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-              <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 5l7 7-7 7'></path>
+            <span
+              class='px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full border border-indigo-200'
+              >TypeScript</span
+            >
+            <svg
+              class='w-4 h-4 text-slate-400'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+            >
+              <path
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                d='M9 5l7 7-7 7'></path>
             </svg>
-            <span class='px-3 py-1 bg-purple-50 text-purple-700 rounded-full border border-purple-200'>Vercel</span>
-            <svg class='w-4 h-4 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-              <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 5l7 7-7 7'></path>
+            <span
+              class='px-3 py-1 bg-purple-50 text-purple-700 rounded-full border border-purple-200'
+              >Vercel</span
+            >
+            <svg
+              class='w-4 h-4 text-slate-400'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+            >
+              <path
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                d='M9 5l7 7-7 7'></path>
             </svg>
-            <span class='px-3 py-1 bg-pink-50 text-slate-800 rounded-full border border-pink-200 ring-2 ring-pink-300 animate-pulse'>Astro</span>
+            <span
+              class='px-3 py-1 bg-pink-50 text-slate-800 rounded-full border border-pink-200 ring-2 ring-pink-300 animate-pulse'
+              >Astro</span
+            >
           </div>
         </div>
 
@@ -230,14 +347,14 @@ const projects = await api.getProjects();
               Object.entries(skillCategories.soft).map(
                 ([skill, description]) => (
                   <div class='group relative'>
-                    <div 
+                    <div
                       class='bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer border border-slate-100 focus:ring-2 focus:ring-blue-500 focus:outline-none'
                       tabindex='0'
                       role='button'
                       aria-describedby={`tooltip-${skill.replace(/\s+/g, '-').toLowerCase()}`}
                     >
                       <span class='text-slate-700 font-medium'>{skill}</span>
-                      <div 
+                      <div
                         id={`tooltip-${skill.replace(/\s+/g, '-').toLowerCase()}`}
                         class='absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 px-4 py-3 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300 pointer-events-none z-20 max-w-xs text-center shadow-xl border border-gray-700'
                         role='tooltip'
@@ -379,7 +496,7 @@ const projects = await api.getProjects();
           ¿Tienes un proyecto en mente? ¡Hablemos y hagámoslo realidad!
         </p>
 
-        <div class='flex justify-center space-x-6'>
+        <div class='flex flex-wrap justify-center gap-4'>
           <a
             href='mailto:tu@email.com'
             class='flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium'
