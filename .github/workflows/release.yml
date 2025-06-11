@@ -4,13 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       description:
-        description: 'Descripción del release (opcional)'
+        description: 'Crea una nueva versión del portfolio con fecha actual, actualiza el changelog, hace commit y publica un release en GitHub'
         required: false
         default: 'Actualización del portfolio'
 
 jobs:
   release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - name: 📥 Checkout
@@ -22,7 +22,7 @@ jobs:
       - name: 📦 Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version-file: '.nvmrc'
           cache: 'npm'
 
       - name: 📥 Install dependencies
