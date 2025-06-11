@@ -166,4 +166,49 @@
       opacity: 1;
     }
   }
+
+  /* Adaptaciones para tema oscuro */
+  [data-theme='dark'] .theme-selector #theme-toggle {
+    background-color: rgba(30, 41, 59, 0.9) !important;
+    border-color: #475569 !important;
+    color: #f1f5f9 !important;
+  }
+
+  [data-theme='dark'] .theme-selector #theme-toggle:hover {
+    background-color: rgba(51, 65, 85, 0.9) !important;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  [data-theme='dark'] .theme-selector #theme-toggle svg {
+    color: #e2e8f0 !important;
+  }
+
+  [data-theme='dark'] .theme-selector #theme-toggle:hover svg {
+    color: #f1f5f9 !important;
+  }
+
+  [data-theme='dark'] .theme-selector #theme-menu {
+    background-color: rgba(30, 41, 59, 0.95) !important;
+    border-color: #475569 !important;
+    backdrop-filter: blur(12px) !important;
+  }
+
+  [data-theme='dark'] .theme-selector .theme-option {
+    color: #e2e8f0 !important;
+  }
+
+  [data-theme='dark'] .theme-selector .theme-option:hover {
+    background-color: rgba(51, 65, 85, 0.8) !important;
+    color: #f1f5f9 !important;
+  }
+
+  /* Estado activo que se mantiene consistente */
+  [data-theme='dark'] .theme-selector .theme-option.bg-blue-50 {
+    background-color: rgba(30, 58, 138, 0.3) !important;
+    color: #93c5fd !important;
+  }
+
+  [data-theme='dark'] .theme-selector .theme-option.text-blue-700 {
+    color: #93c5fd !important;
+  }
 </style>
