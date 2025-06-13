@@ -52,13 +52,47 @@ const projects = await api.getProjects();
       }
     }
   </style>
-  <!-- Navegación de regreso -->
-  <a
-    href='/'
-    class='no-print fixed top-4 left-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 shadow-lg z-50'
-  >
-    ← Volver al Portfolio
-  </a>
+  <!-- Navegación y acciones -->
+  <div class='no-print fixed top-4 left-4 flex gap-3 z-50'>
+    <a
+      href='/'
+      class='bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 shadow-lg flex items-center gap-2'
+    >
+      <svg
+        class='w-4 h-4'
+        fill='none'
+        stroke='currentColor'
+        viewBox='0 0 24 24'
+      >
+        <path
+          stroke-linecap='round'
+          stroke-linejoin='round'
+          stroke-width='2'
+          d='M10 19l-7-7m0 0l7-7m-7 7h18'></path>
+      </svg>
+      Volver al Portfolio
+    </a>
+
+    <button
+      id='print-btn'
+      class='bg-gray-500 hover:bg-gray-600 text-white p-2 rounded-lg transition-colors duration-200 shadow-lg flex items-center justify-center'
+      title='Imprimir Curriculum Vitae'
+    >
+      <svg
+        class='w-5 h-5'
+        fill='none'
+        stroke='currentColor'
+        viewBox='0 0 24 24'
+      >
+        <path
+          stroke-linecap='round'
+          stroke-linejoin='round'
+          stroke-width='2'
+          d='M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z'
+        ></path>
+      </svg>
+    </button>
+  </div>
 
   <!-- Contenedor principal del CV -->
   <div
@@ -306,11 +340,40 @@ const projects = await api.getProjects();
 
   <!-- Script para mejorar la impresión -->
   <script>
+    // Auto-impresión al cargar la página por primera vez
+    document.addEventListener('DOMContentLoaded', () => {
+      // Verificar si es la primera visita usando sessionStorage
+      const hasVisited = sessionStorage.getItem('cv-visited');
+
+      if (!hasVisited) {
+        // Marcar como visitado para esta sesión
+        sessionStorage.setItem('cv-visited', 'true');
+
+        // Esperar a que todo se renderice completamente
+        setTimeout(() => {
+          // Verificar que no hay overlays de error o loading
+          const hasErrors = document.querySelector('vite-error-overlay');
+          if (!hasErrors) {
+            window.print();
+          }
+        }, 1500); // Dar tiempo para que se carguen fuentes y estilos
+      }
+    });
+
+    // Botón de impresión manual
+    const printBtn = document.getElementById('print-btn');
+    if (printBtn) {
+      printBtn.addEventListener('click', () => {
+        window.print();
+      });
+    }
+
     // Optimizar para impresión
     window.addEventListener('beforeprint', () => {
       document.body.classList.add('print-mode');
       // Agregar márgenes tipo Google Docs
       const style = document.createElement('style');
+      style.id = 'print-styles';
       style.textContent = `
         @page {
           margin: 1.27cm 1.27cm 1.27cm 1.27cm;
@@ -322,14 +385,24 @@ const projects = await api.getProjects();
 
     window.addEventListener('afterprint', () => {
       document.body.classList.remove('print-mode');
+      // Limpiar estilos de impresión
+      const printStyles = document.getElementById('print-styles');
+      if (printStyles) {
+        printStyles.remove();
+      }
     });
 
     // Atajo de teclado para imprimir
     document.addEventListener('keydown', (e) => {
-      if (e.ctrlKey && e.key === 'p') {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
         e.preventDefault();
         window.print();
       }
+    });
+
+    // Prevenir scroll involuntario durante la carga
+    window.addEventListener('load', () => {
+      window.scrollTo(0, 0);
     });
   </script>
 </Layout>
