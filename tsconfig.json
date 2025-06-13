@@ -1,8 +1,10 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"],
+  "exclude": ["dist", "node_modules", "tailwind.config.js", "astro.config.mjs"],
   "compilerOptions": {
+    /* Portfolio configuration */
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],

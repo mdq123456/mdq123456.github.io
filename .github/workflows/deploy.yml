@@ -1,14 +1,29 @@
-name: 🏷️ Auto Tag CalVer
+name: 🚀 Deploy Portfolio
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
+# Configurar permisos para GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Solo permitir un deploy a la vez
+concurrency:
+  group: 'portfolio-pages'
+  cancel-in-progress: false
+
 jobs:
+  # Crear tag CalVer automáticamente
   auto-tag:
     name: 🏷️ Create CalVer Tag
     runs-on: ubuntu-22.04
+    outputs:
+      tag_name: ${{ steps.tag.outputs.tag_name }}
+      version: ${{ steps.tag.outputs.version }}
     steps:
       - name: 📥 Checkout
         uses: actions/checkout@v4
@@ -48,36 +63,106 @@ jobs:
         run: |
           git push origin ${{ steps.tag.outputs.tag_name }}
 
+  # Build y deploy del portfolio
+  build-portfolio:
+    name: 🏗️ Build Portfolio
+    runs-on: ubuntu-22.04
+    needs: auto-tag
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - name: 📥 Install dependencies
+        run: npm ci
+
+      - name: 🏗️ Build portfolio
+        run: npm run build
+
+      - name: 📊 Upload portfolio artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          name: portfolio-pages
+          path: ./dist
+
+  # Deploy del portfolio
+  deploy-portfolio:
+    name: 🚀 Deploy Portfolio
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-22.04
+    needs: [auto-tag, build-portfolio]
+    steps:
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: portfolio-pages
+
+      - name: 📊 Summary
+        run: |
+          echo "## 🚀 Portfolio Desplegado" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **URL**: ${{ steps.deployment.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Tag**: ${{ needs.auto-tag.outputs.tag_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 🔗 Enlaces útiles" >> $GITHUB_STEP_SUMMARY
+          echo "- [Ver Portfolio](${{ steps.deployment.outputs.page_url }})" >> $GITHUB_STEP_SUMMARY
+          echo "- [Ver CV](${{ steps.deployment.outputs.page_url }}curriculum-vitae/)" >> $GITHUB_STEP_SUMMARY
+
+  # Crear GitHub Release
+  create-release:
+    name: 🎉 Create Release
+    runs-on: ubuntu-22.04
+    needs: [auto-tag, deploy-portfolio]
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
       - name: 🎉 Create GitHub Release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.tag.outputs.tag_name }}
-          release_name: 📦 Auto Release ${{ steps.tag.outputs.tag_name }}
+          tag_name: ${{ needs.auto-tag.outputs.tag_name }}
+          release_name: 📦 Release ${{ needs.auto-tag.outputs.tag_name }}
           body: |
             ## 🚀 Release Automático del Portfolio
 
-            **Versión**: `${{ steps.tag.outputs.tag_name }}`
+            **Versión**: `${{ needs.auto-tag.outputs.tag_name }}`
             **Fecha**: $(date +'%d de %B de %Y')
             **Commit**: ${{ github.sha }}
 
-            ### 🔗 Enlaces
+            ### 🌐 Deployment
+            - **Portfolio**: [mdq123456.github.io](https://mdq123456.github.io)
+
+            ### 📦 Contenido
+            - ✅ Portfolio personal actualizado
+            - 🎨 Diseño moderno y responsive
+            - 📄 CV interactivo incluido
+
+            ### 🔗 Enlaces Útiles
             - [Ver Portfolio](https://mdq123456.github.io)
+            - [Ver CV](https://mdq123456.github.io/curriculum-vitae/)
             - [Ver Cambios](https://github.com/mdq123456/mdq123456.github.io/commit/${{ github.sha }})
-            - [Ver Release](https://github.com/mdq123456/mdq123456.github.io/releases/tag/${{ steps.tag.outputs.tag_name }})
           draft: false
           prerelease: false
 
-      - name: 📊 Summary
+      - name: 📊 Final Summary
         run: |
-          echo "## 🎉 Tag y Release Creados Automáticamente" >> $GITHUB_STEP_SUMMARY
+          echo "## 🎉 Portfolio Release Completado" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- **Tag**: ${{ steps.tag.outputs.tag_name }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Versión**: ${{ steps.tag.outputs.version }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Tag**: ${{ needs.auto-tag.outputs.tag_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Portfolio**: ✅ Desplegado" >> $GITHUB_STEP_SUMMARY
+          echo "- **Release**: ✅ Creado" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 🔗 Enlaces útiles" >> $GITHUB_STEP_SUMMARY
-          echo "- [Ver Portfolio](https://mdq123456.github.io)" >> $GITHUB_STEP_SUMMARY
-          echo "- [Ver Release](https://github.com/mdq123456/mdq123456.github.io/releases/latest)" >> $GITHUB_STEP_SUMMARY
-          echo "- [Ver Tags](https://github.com/mdq123456/mdq123456.github.io/tags)" >> $GITHUB_STEP_SUMMARY
+          echo "### 🔗 Enlaces" >> $GITHUB_STEP_SUMMARY
+          echo "- [Portfolio Principal](https://mdq123456.github.io)" >> $GITHUB_STEP_SUMMARY
+          echo "- [Último Release](https://github.com/mdq123456/mdq123456.github.io/releases/latest)" >> $GITHUB_STEP_SUMMARY

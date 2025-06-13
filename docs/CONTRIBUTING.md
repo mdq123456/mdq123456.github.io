@@ -2,12 +2,8 @@
 
 ## 🎯 Areas de Contribución
 
-### 🎨 **Design System y Componentes**
-Para contribuir al catálogo de componentes y design system:
-**📋 [Ver Guía Específica de Componentes](./src/components/CONTRIBUTING.md)**
-
 ### 💻 **Portfolio y Desarrollo General**
-Sigue esta guía para desarrollo general del portfolio.
+Contribuye al desarrollo del portfolio personal y sus funcionalidades.
 
 ---
 
@@ -17,28 +13,50 @@ Sigue esta guía para desarrollo general del portfolio.
 
 ```bash
 # Desarrollo diario
-npm run dev                  # Servidor desarrollo con catálogo integrado
-npm run test:full           # Test completo (build + a11y todos los temas)  
-npm run server:restart      # Si algo se rompe
+npm run dev                  # Servidor de desarrollo
+npm run test:full           # Test completo (build + a11y)  
+npm run build               # Build para producción
 
-# Release
-npm run release             # CalVer automático + push
+# Type checking
+npm run type-check          # Verificación de tipos
+npm run type-check:all      # Incluye scripts
 ```
 
-## 🔍 Testing de Calidad
+## 🛠️ Desarrollo del Portfolio
+
+### 🚀 **Comandos Principales**
 
 ```bash
-npm run a11y:quick          # Test accesibilidad (3 temas: light/dark/print)
-npm run type-check:all      # Verificar tipos TypeScript
-npm run test:build          # Type-check + build
+# Desarrollo
+npm run dev              # Portfolio en localhost:4321
+npm run build            # Build para producción
+npm run preview          # Preview del build
+
+# Testing y Quality
+npm run type-check       # Verificación de tipos
+npm run type-check:all   # Incluye scripts
+npm run a11y             # Tests de accesibilidad
+npm run test:build       # Test del build
+npm run test:full        # Test completo
 ```
 
-## 🛠️ Utilidades
+### 📁 **Estructura del Proyecto**
 
-```bash
-npm run clean               # Limpiar cache/build
-npm run setup:browsers      # Instalar Playwright
-npm run server:stop         # Matar procesos Astro
+```
+mdq123456.github.io/
+├── src/
+│   ├── components/      # Componentes Astro
+│   ├── layouts/         # Layouts base
+│   ├── pages/           # Páginas del sitio
+│   ├── assets/          # Assets estáticos
+│   └── types/           # Tipos TypeScript
+├── public/              # Assets públicos
+├── scripts/             # Scripts de utilidad
+├── docs/               # Documentación
+├── package.json        # Dependencias
+├── astro.config.mjs    # Config Astro
+├── tsconfig.json       # Config TypeScript
+└── tailwind.config.js  # Config Tailwind
 ```
 
 ## 🎯 Flujos Típicos

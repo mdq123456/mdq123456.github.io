@@ -1,14 +1,13 @@
 {
-  "name": "portfolio-mdq123456",
+  "name": "@mdq123456/portfolio",
   "type": "module",
-  "version": "2025.06.05",
+  "version": "2025.06.13",
+  "private": true,
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "release": "npm run release:today",
-    "release:today": "npm version $(date +'%Y.%m.%d') && git push --follow-tags",
     "a11y": "npm run build && npm run preview & sleep 5 && npx tsx scripts/accessibility-test.ts",
     "a11y:ci": "npx tsx scripts/accessibility-test.ts",
     "a11y:quick": "npx tsx scripts/accessibility-test.ts",
@@ -17,18 +16,7 @@
     "type-check:all": "npm run type-check && npm run type-check:scripts",
     "test:build": "npm run type-check:all && npm run build",
     "test:full": "npm run test:build && npm run preview & sleep 5 && npm run a11y:quick",
-    "server:dev": "npm run dev",
-    "server:preview": "npm run build && npm run preview",
-    "server:stop": "pkill -f 'astro' || echo 'No Astro processes running'",
-    "server:restart": "npm run server:stop && sleep 2 && npm run server:preview &",
-    "lint:check": "npm run type-check:all",
-    "lint:fix": "echo 'No linter configured yet'",
-    "clean": "rm -rf dist .astro node_modules/.vite",
-    "clean:install": "npm run clean && npm install",
-    "git:status": "git status",
-    "git:push": "git add . && git status && echo 'Ready to commit. Run: git commit -m \"your message\" && git push'",
-    "setup:browsers": "npx playwright install chromium",
-    "setup:dev": "npm install && npm run setup:browsers && npm run type-check:all"
+    "clean": "rm -rf dist .astro node_modules/.vite"
   },
   "dependencies": {
     "@tailwindcss/vite": "4.1.7",
