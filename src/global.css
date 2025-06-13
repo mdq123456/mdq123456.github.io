@@ -208,17 +208,91 @@ body {
   background: var(--bg-gradient-secondary);
 }
 
+/* Estilos para cards de soft skills */
+.skill-card {
+  min-height: 140px;
+  transition: all 0.3s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-4px);
+  min-height: auto;
+}
+
+.skill-card .skill-text-container {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Utilidad para limitar líneas de texto */
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  line-height: 1.5;
+  max-height: calc(1.5em * 2);
+}
+
+.line-clamp-none {
+  overflow: visible;
+  display: block;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+  max-height: none;
+}
+
+/* Mejorar accesibilidad y contraste */
+.skill-card:focus-within {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Asegurar suficiente contraste en hover */
+.skill-card:hover h4 {
+  color: #1e40af;
+}
+
+/* Responsive mobile improvements */
+@media (max-width: 640px) {
+  .skill-card {
+    min-height: 140px;
+  }
+
+  .skill-card:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+}
+
+/* Estilos para tema oscuro - Cards de soft skills */
+[data-theme="dark"] .skill-card {
+  background-color: #1e293b;
+  border-color: #334155;
+}
+
+[data-theme="dark"] .skill-card .text-slate-800 {
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .skill-card .text-slate-600 {
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .skill-card .text-slate-700 {
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .skill-card .border-slate-100 {
+  border-color: #334155;
+}
+
+[data-theme="dark"] .skill-card .bg-gradient-to-br.from-blue-50.to-purple-50 {
+  background: linear-gradient(to bottom right, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1));
+}
+
 [data-theme="dark"] .bg-slate-800 {
   background-color: #0f172a;
   color: #f1f5f9;
-}
-
-[data-theme="dark"] .bg-slate-800 .text-white {
-  color: #f1f5f9;
-}
-
-[data-theme="dark"] .border-t-slate-800 {
-  border-top-color: #0f172a;
 }
 
 /* Mejorar contraste de tooltips en tema oscuro */
