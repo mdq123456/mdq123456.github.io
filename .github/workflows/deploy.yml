@@ -1,0 +1,83 @@
+name: 🏷️ Auto Tag CalVer
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  auto-tag:
+    name: 🏷️ Create CalVer Tag
+    runs-on: ubuntu-22.04
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🔧 Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: 🏷️ Create CalVer tag
+        id: tag
+        run: |
+          # Generar versión CalVer (YYYY.MM.DD)
+          NEW_VERSION=$(date +'%Y.%m.%d')
+          TAG_NAME="v$NEW_VERSION"
+
+          # Verificar si el tag ya existe
+          if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
+            echo "⚠️ Tag $TAG_NAME ya existe para hoy"
+            echo "🔄 Actualizando tag existente con los últimos cambios"
+            git tag -d "$TAG_NAME" || true
+            git push --delete origin "$TAG_NAME" || true
+          fi
+
+          echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+          # Crear tag
+          git tag "$TAG_NAME" -m "Auto-release $TAG_NAME from main"
+
+          echo "✅ Tag $TAG_NAME creado/actualizado"
+
+      - name: 📤 Push tag
+        run: |
+          git push origin ${{ steps.tag.outputs.tag_name }}
+
+      - name: 🎉 Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.tag.outputs.tag_name }}
+          release_name: 📦 Auto Release ${{ steps.tag.outputs.tag_name }}
+          body: |
+            ## 🚀 Release Automático del Portfolio
+
+            **Versión**: `${{ steps.tag.outputs.tag_name }}`
+            **Fecha**: $(date +'%d de %B de %Y')
+            **Commit**: ${{ github.sha }}
+
+            ### 🔗 Enlaces
+            - [Ver Portfolio](https://mdq123456.github.io)
+            - [Ver Cambios](https://github.com/mdq123456/mdq123456.github.io/commit/${{ github.sha }})
+            - [Ver Release](https://github.com/mdq123456/mdq123456.github.io/releases/tag/${{ steps.tag.outputs.tag_name }})
+          draft: false
+          prerelease: false
+
+      - name: 📊 Summary
+        run: |
+          echo "## 🎉 Tag y Release Creados Automáticamente" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Tag**: ${{ steps.tag.outputs.tag_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Versión**: ${{ steps.tag.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 🔗 Enlaces útiles" >> $GITHUB_STEP_SUMMARY
+          echo "- [Ver Portfolio](https://mdq123456.github.io)" >> $GITHUB_STEP_SUMMARY
+          echo "- [Ver Release](https://github.com/mdq123456/mdq123456.github.io/releases/latest)" >> $GITHUB_STEP_SUMMARY
+          echo "- [Ver Tags](https://github.com/mdq123456/mdq123456.github.io/tags)" >> $GITHUB_STEP_SUMMARY
