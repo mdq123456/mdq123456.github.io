@@ -44,7 +44,6 @@ mdq123456.github.io/                    # 🗂️ Proyecto root
 | :------------------------ | :----------------------------------------------- |
 | `npm run dev`             | Inicia el portfolio en `localhost:4321`         |
 | `npm run dev:portfolio`   | Específicamente el portfolio                     |
-| `npm run dev:storybook`   | Storybook en `localhost:6006` (próximamente)    |
 
 ### 🏗️ **Build y Deploy**
 | Comando                   | Acción                                           |
@@ -77,6 +76,24 @@ npm run clean            # Limpiar builds y cache
 
 # Scripts auxiliares
 npm run type-check:scripts  # Type-check de scripts
+```
+
+### 🧪 **Testing Local con Act**
+```bash
+# Instalar act (si no está instalado)
+brew install act
+
+# Probar build y tests localmente (requiere Docker)
+act --workflows .github/workflows/test.yml --job test-build
+
+# Probar el clean check
+act --workflows .github/workflows/test.yml --job clean-check
+
+# Listar todos los jobs disponibles
+act --workflows .github/workflows/test.yml --list
+
+# Ejecutar con arquitectura específica (M1/M2 Macs)
+act --workflows .github/workflows/test.yml --job test-build --container-architecture linux/amd64
 ```
 
 ## 🚀 Secciones del Portfolio
@@ -133,33 +150,33 @@ Este proyecto utiliza [Calendar Versioning (CalVer)](https://calver.org/) con fo
 - ✅ Sistema de temas (futuro)
 
 ### 🏗️ **En Desarrollo**
+- 🚧 SEO avanzado y metadatos
 - 🚧 Sección de blog/artículos
 - 🚧 Modo oscuro/claro dinámico
 - 🚧 Animaciones y transiciones mejoradas
-- 🚧 SEO avanzado y metadatos
 
 ### 🔮 **Futuro**
-- 📱 PWA (Progressive Web App)
-- 🌐 Internacionalización (i18n)
 - 📊 Analytics y métricas
+- 🌐 Internacionalización (i18n)
 - 🎨 Temas personalizables
+- 📱 PWA (Progressive Web App)
 
 ## 📖 Documentación
 
 ### 📁 Documentación Específica
+- **🔄 Cambios**: [`docs/CHANGELOG.md`](./docs/CHANGELOG.md)
 - **🏗️ Arquitectura**: [`docs/PORTFOLIO.md`](./docs/PORTFOLIO.md)
 - **🤝 Contribución**: [`docs/CONTRIBUTING.md`](./docs/CONTRIBUTING.md)
-- **🔄 Cambios**: [`docs/CHANGELOG.md`](./docs/CHANGELOG.md)
 
 ### 🔗 Enlaces Útiles
 - **Portfolio**: [mdq123456.github.io](https://mdq123456.github.io)
-- **CV**: [mdq123456.github.io/curriculum-vitae](https://mdq123456.github.io/curriculum-vitae/)
 - **Releases**: [GitHub Releases](https://github.com/mdq123456/mdq123456.github.io/releases)
+- **CV**: [mdq123456.github.io/curriculum-vitae](https://mdq123456.github.io/curriculum-vitae/)
 
 ## 📚 Recursos Técnicos
 
-- [Documentación de Astro](https://docs.astro.build)
-- [Guía de Tailwind CSS](https://tailwindcss.com/docs)
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)
 - [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
 - [CalVer Specification](https://calver.org/)
+- [Guía de Tailwind CSS](https://tailwindcss.com/docs)
+- [Documentación de Astro](https://docs.astro.build)
