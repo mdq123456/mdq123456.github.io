@@ -10,7 +10,6 @@ permissions:
   contents: read
 
 jobs:
-  # 🧪 TESTING SOLO (sin deploy, sin secretos, sin tagueo)
   test-build:
     name: 🧪 Test Build & Quality
     runs-on: ubuntu-22.04

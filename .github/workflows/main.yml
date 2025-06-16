@@ -1,4 +1,4 @@
-name: 🚀 Deploy Portfolio
+name: 🚀 Build, Tag & Deploy
 
 on:
   push:
@@ -57,7 +57,7 @@ jobs:
         run: |
           # Generar versión CalVer (YYYY.MM.DD)
           NEW_VERSION=$(date +'%Y.%m.%d')
-          TAG_NAME="v$NEW_VERSION"
+          TAG_NAME="$NEW_VERSION"
 
           # Verificar si el tag ya existe
           if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
@@ -71,7 +71,7 @@ jobs:
           echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
           # Crear tag
-          git tag "$TAG_NAME" -m "Auto-release $TAG_NAME from main"
+          git tag "$TAG_NAME" -m "Auto-release $TAG_NAME"
           echo "✅ Tag $TAG_NAME creado/actualizado"
 
       - name: 📤 Push tag
@@ -96,26 +96,20 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ steps.tag.outputs.tag_name }}
-          release_name: 📦 Release ${{ steps.tag.outputs.tag_name }}
+          release_name: 📦 ${{ steps.tag.outputs.tag_name }}
           body: |
-            ## 🚀 Release Automático del Portfolio
-
             **Versión**: `${{ steps.tag.outputs.tag_name }}`
-            **Fecha**: $(date +'%d de %B de %Y')
-            **Commit**: ${{ github.sha }}
 
             ### 🌐 Deployment
-            - **Portfolio**: [mdq123456.github.io](https://mdq123456.github.io)
-
-            ### 📦 Contenido
-            - ✅ Portfolio personal actualizado
-            - 🎨 Diseño moderno y responsive
-            - 📄 CV interactivo incluido
-
-            ### 🔗 Enlaces Útiles
             - [Ver Portfolio](${{ steps.deployment.outputs.page_url }})
             - [Ver CV](${{ steps.deployment.outputs.page_url }}curriculum-vitae/)
             - [Ver Cambios](https://github.com/mdq123456/mdq123456.github.io/commit/${{ github.sha }})
+
+            ### 📦 Contenido
+            - 📄 CV interactivo incluido
+            - 🎨 Diseño moderno y responsive
+            - ✅ Portfolio personal actualizado
+
           draft: false
           prerelease: false
 
