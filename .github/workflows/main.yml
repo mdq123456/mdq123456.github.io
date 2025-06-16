@@ -1,0 +1,132 @@
+name: 🚀 Deploy Portfolio
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Permisos necesarios para GitHub Pages y releases
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# Solo permitir un deploy a la vez
+concurrency:
+  group: 'portfolio-deploy'
+  cancel-in-progress: false
+
+jobs:
+  # 🚀 BUILD, TAG Y DEPLOY (solo en GitHub)
+  deploy-and-release:
+    name: 🚀 Build, Tag & Deploy
+    if: github.repository == 'mdq123456/mdq123456.github.io'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-22.04
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - name: 📥 Install dependencies
+        run: npm ci
+
+      - name: 🔍 Type check
+        run: npm run type-check
+
+      - name: 🏗️ Build portfolio
+        run: npm run build
+
+      - name: 🔧 Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: 🏷️ Create CalVer tag
+        id: tag
+        run: |
+          # Generar versión CalVer (YYYY.MM.DD)
+          NEW_VERSION=$(date +'%Y.%m.%d')
+          TAG_NAME="v$NEW_VERSION"
+
+          # Verificar si el tag ya existe
+          if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
+            echo "⚠️ Tag $TAG_NAME ya existe para hoy"
+            echo "🔄 Actualizando tag existente con los últimos cambios"
+            git tag -d "$TAG_NAME" || true
+            git push --delete origin "$TAG_NAME" || true
+          fi
+
+          echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+          # Crear tag
+          git tag "$TAG_NAME" -m "Auto-release $TAG_NAME from main"
+          echo "✅ Tag $TAG_NAME creado/actualizado"
+
+      - name: 📤 Push tag
+        run: |
+          git push origin ${{ steps.tag.outputs.tag_name }}
+
+      - name: 📊 Upload build artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          name: portfolio-pages
+          path: ./dist
+
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: portfolio-pages
+
+      - name: 🎉 Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.tag.outputs.tag_name }}
+          release_name: 📦 Release ${{ steps.tag.outputs.tag_name }}
+          body: |
+            ## 🚀 Release Automático del Portfolio
+
+            **Versión**: `${{ steps.tag.outputs.tag_name }}`
+            **Fecha**: $(date +'%d de %B de %Y')
+            **Commit**: ${{ github.sha }}
+
+            ### 🌐 Deployment
+            - **Portfolio**: [mdq123456.github.io](https://mdq123456.github.io)
+
+            ### 📦 Contenido
+            - ✅ Portfolio personal actualizado
+            - 🎨 Diseño moderno y responsive
+            - 📄 CV interactivo incluido
+
+            ### 🔗 Enlaces Útiles
+            - [Ver Portfolio](${{ steps.deployment.outputs.page_url }})
+            - [Ver CV](${{ steps.deployment.outputs.page_url }}curriculum-vitae/)
+            - [Ver Cambios](https://github.com/mdq123456/mdq123456.github.io/commit/${{ github.sha }})
+          draft: false
+          prerelease: false
+
+      - name: 📊 Deploy Summary
+        run: |
+          echo "## 🎉 Portfolio Deploy Completado" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Tag**: ${{ steps.tag.outputs.tag_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **URL**: ${{ steps.deployment.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 🔗 Enlaces" >> $GITHUB_STEP_SUMMARY
+          echo "- [Portfolio Principal](${{ steps.deployment.outputs.page_url }})" >> $GITHUB_STEP_SUMMARY
+          echo "- [Último Release](https://github.com/mdq123456/mdq123456.github.io/releases/latest)" >> $GITHUB_STEP_SUMMARY
