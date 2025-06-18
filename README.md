@@ -180,3 +180,7 @@ Este proyecto utiliza [Calendar Versioning (CalVer)](https://calver.org/) con fo
 - [CalVer Specification](https://calver.org/)
 - [Guía de Tailwind CSS](https://tailwindcss.com/docs)
 - [Documentación de Astro](https://docs.astro.build)
+
+---
+
+**Hecho con pasión y tecnología por Martín Di Quinzio**
