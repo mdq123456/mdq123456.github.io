@@ -17,7 +17,7 @@ Portfolio profesional con arquitectura escalable, deployment automático con Cal
 ## 🏗️ Arquitectura del Proyecto
 
 ```
-mdq123456.github.io/                    # 🗂️ Proyecto root
+diegoquintanadeitu.github.io/                    # 🗂️ Proyecto root
 ├── .github/workflows/
 │   ├── deploy.yml                      # 🚀 Deploy automático con CalVer
 │   └── accessibility.yml              # ♿ Tests de accesibilidad
@@ -169,9 +169,9 @@ Este proyecto utiliza [Calendar Versioning (CalVer)](https://calver.org/) con fo
 - **🤝 Contribución**: [`docs/CONTRIBUTING.md`](./docs/CONTRIBUTING.md)
 
 ### 🔗 Enlaces Útiles
-- **Portfolio**: [mdq123456.github.io](https://mdq123456.github.io)
-- **Releases**: [GitHub Releases](https://github.com/mdq123456/mdq123456.github.io/releases)
-- **CV**: [mdq123456.github.io/curriculum-vitae](https://mdq123456.github.io/curriculum-vitae/)
+- **Portfolio**: [diegoquintanadeitu.github.io](https://diegoquintanadeitu.github.io)
+- **Releases**: [GitHub Releases](https://github.com/diegoquintanadeitu/diegoquintanadeitu/releases)
+- **CV**: [diegoquintanadeitu.github.io/curriculum-vitae](https://diegoquintanadeitu.github.io/curriculum-vitae/)
 
 ## 📚 Recursos Técnicos
 

@@ -2,7 +2,7 @@ name: 🚀 Build, Tag & Deploy
 
 on:
   push:
-    branches: [main]
+    branches: [production]
   workflow_dispatch:
 
 # Permisos necesarios para GitHub Pages y releases
@@ -20,7 +20,7 @@ jobs:
   # 🚀 BUILD, TAG Y DEPLOY (solo en GitHub)
   deploy-and-release:
     name: 🚀 Build, Tag & Deploy
-    if: github.repository == 'mdq123456/mdq123456.github.io'
+    if: github.repository == 'diegoquintanadeitu/diegoquintanadeitu'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -103,7 +103,7 @@ jobs:
             ### 🌐 Deployment
             - [Ver Portfolio](${{ steps.deployment.outputs.page_url }})
             - [Ver CV](${{ steps.deployment.outputs.page_url }}curriculum-vitae/)
-            - [Ver Cambios](https://github.com/mdq123456/mdq123456.github.io/commit/${{ github.sha }})
+            - [Ver Cambios](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
 
             ### 📦 Contenido
             - 📄 CV interactivo incluido
@@ -123,4 +123,4 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### 🔗 Enlaces" >> $GITHUB_STEP_SUMMARY
           echo "- [Portfolio Principal](${{ steps.deployment.outputs.page_url }})" >> $GITHUB_STEP_SUMMARY
-          echo "- [Último Release](https://github.com/mdq123456/mdq123456.github.io/releases/latest)" >> $GITHUB_STEP_SUMMARY
+          echo "- [Último Release](https://github.com/${{ github.repository }}/releases/latest)" >> $GITHUB_STEP_SUMMARY

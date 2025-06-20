@@ -120,7 +120,7 @@ export const mockData = {
       description:
         'Sitio web moderno y responsivo construido con Astro, TypeScript y Tailwind CSS. Incluye sistema de versionado CalVer y CI/CD.',
       technologies: ['Astro', 'TypeScript', 'Tailwind CSS', 'GitHub Actions'],
-      link: 'https://mdq123456.github.io',
+      link: 'https://diegoquintanadeitu.github.io',
       year: 2025,
     },
     {
